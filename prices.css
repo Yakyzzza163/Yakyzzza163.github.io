@@ -1,0 +1,33 @@
+.prices{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);align-items:start;gap:clamp(36px,5vw,80px);padding:76px 5.5vw 80px;border-top:1px solid #ffffff1f;background:#171b18;color:#f5f5ef;color-scheme:dark;scroll-margin-top:0}
+.prices h2{font-size:clamp(32px,3.5vw,48px);font-weight:700;letter-spacing:-.05em;line-height:1.15;margin:0}
+.prices-body{min-width:0}
+.price-tabs{display:flex;align-items:stretch;gap:24px;overflow-x:auto;border-bottom:1px solid #ffffff26;scrollbar-width:none;overscroll-behavior-x:contain}
+.price-tabs::-webkit-scrollbar{display:none}
+.price-tab{flex:none;min-height:48px;padding:0 0 15px;border-bottom:2px solid transparent;color:#a6aea3;font-size:16px;line-height:1.4;white-space:nowrap}
+.price-tab[aria-selected=true]{border-bottom-color:#fff;color:#fff}
+.price-tab:hover{color:#fff;opacity:1}
+.price-tab:focus-visible{outline-offset:-3px}
+.price-panel[hidden]{display:none}
+.price-list{margin:20px 0 0}
+.price-row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:24px;padding:19px 0;border-bottom:1px solid #ffffff1c;font-size:17px;line-height:1.45}
+.price-row dt{min-width:0;font-weight:400}
+.price-row dd{margin:0;color:#f5f5ef;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price-footer{display:flex;justify-content:flex-end;margin-top:28px}
+.price-booking{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-width:181px;min-height:54px;padding:14px 21px;border:1px solid #ffffffa6;color:#fff;background:transparent;font-size:15px;font-weight:500;line-height:1.5}
+.price-booking span{font-size:22px;line-height:1}
+.price-booking:hover{background:#ffffff18;border-color:#fff;opacity:1}
+.barber-details{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}
+.barber-details .barber-rating,.barber-details .no-reviews{margin:0;min-height:24px}
+.barber-prices{display:inline-flex;align-items:center;justify-content:flex-end;min-width:44px;min-height:44px;color:#c4c8c0;font-size:13px;text-decoration:underline;text-decoration-color:#ffffff66;text-underline-offset:5px}
+.barber-prices:hover{opacity:1;color:#fff;text-decoration-color:#fff}
+@media(max-width:1000px){.prices{gap:32px;padding-top:64px;padding-bottom:64px}.price-tabs{gap:20px}.price-tab{font-size:15px}}
+@media(max-width:700px){.prices{grid-template-columns:1fr;gap:27px;padding:48px 24px 52px}.prices h2{font-size:32px}.price-tabs{gap:16px}.price-tab{font-size:16px;min-height:48px;padding-bottom:13px}.price-list{margin-top:10px}.price-row{font-size:16px;gap:18px;padding:18px 0}.price-booking{width:100%;font-size:14px}.price-footer{margin-top:25px}}
+@media(max-width:360px){.prices{padding-left:20px;padding-right:20px}.price-row{font-size:15px;gap:12px}.price-tabs{gap:16px}}
+
+.price-service{display:inline-flex;align-items:center;gap:12px;width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;line-height:inherit;text-align:left}
+.price-service::after{content:"";position:absolute;inset:0;cursor:pointer}
+.price-service:hover{color:#fff;opacity:1}
+.price-row:hover,.price-row:focus-within{background:#ffffff06}
+.price-row[data-selected=true]{background:#ffffff0a}
+.price-service:focus-visible{outline:none}
+.price-row:focus-within{outline:1px solid #ffffff80;outline-offset:4px}
