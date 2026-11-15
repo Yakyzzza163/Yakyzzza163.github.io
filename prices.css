@@ -31,3 +31,82 @@
 .price-row[data-selected=true]{background:#ffffff0a}
 .price-service:focus-visible{outline:none}
 .price-row:focus-within{outline:1px solid #ffffff80;outline-offset:4px}
+
+.price-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.price-modes button {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #ffffff30;
+  color: #c4c8c0;
+  font-size: 14px;
+}
+
+.price-modes button[aria-pressed="true"] {
+  background: #ffffff13;
+  border-color: #ffffff70;
+  color: #fff;
+}
+
+.price-service-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 12px;
+  border: 1px solid #ffffff45;
+  border-radius: 0;
+  background: #202420;
+  color: inherit;
+  font: inherit;
+  font-size: 16px;
+}
+
+#price-compare-list .price-row[data-selected="true"] {
+  background: #ffffff13;
+  border-bottom-color: #ffffff90;
+}
+
+.price-row-unavailable, .price-row-unavailable dd {
+  color: #a6aea3;
+}
+
+.price-compare-footer {
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.price-compare-status {
+  margin: 0;
+  color: #c4c8c0;
+  font-size: 14px;
+}
+
+.price-booking[aria-disabled="true"] {
+  opacity: .5;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .price-compare-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 420px) {
+  .price-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 12px;
+  }
+
+  .price-tab {
+    padding-bottom: 0;
+    text-align: left;
+  }
+}

@@ -10,3 +10,26 @@
 @media(max-height:550px){.lookbook-sticky{height:100vh;height:100svh;min-height:360px}.lookbook[data-engaged=true] .lb-brand-row{left:24px;right:24px;bottom:auto;top:24px}.lookbook[data-engaged=true] .lb-photo-bottom{left:24px;right:24px;bottom:130px}.lookbook[data-engaged=true] .lb-footer{padding-bottom:16px}.angles-frame{height:40svh;min-height:180px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#lookbook-canvas,.lb-footer,.lb-title,.lb-brand-row,.lb-photo-bottom,.location-route{transition:none}}
 .contact-dialog{color-scheme:dark}
+
+.lb-section-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 14px;
+  margin-top: 4px;
+}
+
+.lb-section-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: underline;
+  text-decoration-color: #ffffff80;
+  text-underline-offset: 4px;
+}
+
+.lb-section-links a:hover {
+  opacity: 1;
+  text-decoration-color: #fff;
+}
