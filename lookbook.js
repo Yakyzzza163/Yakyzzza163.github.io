@@ -31,8 +31,6 @@
   const heroes = new Map();
   const heroLoads = new Map();
   const frames = new Map();
-  let assets;
-  let heroAssets;
   let angle = 1;
   let angleCut = cuts[0];
   let activeIndex = 0;
@@ -55,7 +53,7 @@
     status.hidden = !text;
   }
 
-  function loadAsset(id, definitions, cache, pending) {
+  function loadAsset(id, directory, cache, pending) {
     if (cache.has(id)) return Promise.resolve(cache.get(id));
     if (pending.has(id)) return pending.get(id);
     const promise = new Promise((resolve, reject) => {
@@ -63,13 +61,13 @@
       img.decoding = 'async';
       img.onload = () => { cache.set(id, img); schedule(); resolve(img); };
       img.onerror = () => { pending.delete(id); reject(new Error('image')); };
-      img.src = definitions.get(id).file;
+      img.src = `./assets/${directory}/${id}.webp`;
     });
     pending.set(id, promise);
     return promise;
   }
-  const loadImage = id => loadAsset(id, assets, images, loads);
-  const loadHero = id => loadAsset(id, heroAssets, heroes, heroLoads);
+  const loadImage = id => loadAsset(id, 'haircuts', images, loads);
+  const loadHero = id => loadAsset(id, 'editorial', heroes, heroLoads);
 
   function feather(ctx, w, h) {
     ctx.save();
@@ -188,11 +186,18 @@
 
   function schedule() { if (!animation) animation = requestAnimationFrame(draw); }
 
+  function startScene() {
+    if (sceneReady) return;
+    sceneReady = true;
+    save.disabled = viewTrigger.disabled = false;
+  }
+
   async function choose(index, animate = false) {
     const request = ++navigation;
     try {
-      await ready; await loadHero(cuts[index].id);
+      await loadHero(cuts[index].id);
       if (request !== navigation) return;
+      startScene();
       manualExploring = true;
       manualIndex = index;
       const range = Math.max(0, section.offsetHeight - sticky.offsetHeight);
@@ -202,7 +207,7 @@
         scrollTo({ top: top + range * index / (cuts.length - 1), behavior: animate && !reduced.matches ? 'smooth' : 'auto' });
       }
       message(''); schedule();
-    } catch { message('Не удалось загрузить этот образ. Попробуйте ещё раз.'); }
+    } catch { if (request === navigation) message('Не удалось загрузить этот образ. Попробуйте ещё раз.'); }
   }
 
   function changeView(index) {
@@ -216,7 +221,7 @@
     const cut = cuts[activeIndex];
     viewTrigger.disabled = true;
     try {
-      await ready; await loadImage(cut.id);
+      await loadImage(cut.id);
       if (request !== modalRequest) return;
       manualExploring = true;
       angleCut = cut;
@@ -261,7 +266,6 @@
     const oldText = origin.textContent; origin.textContent = 'Готовим JPG…';
     let pendingUrl;
     try {
-      await ready;
       const blob = await makeCard(cut, view);
       if (request !== modalRequest) return;
       pendingUrl = URL.createObjectURL(blob);
@@ -316,13 +320,10 @@
     observer.observe($('.angles-frame'));
   }
   addEventListener('pagehide', () => { if (cardUrl) URL.revokeObjectURL(cardUrl); });
-  const json = url => fetch(url).then(response => { if (!response.ok) throw new Error('manifest'); return response.json(); });
-  const ready = Promise.all([json('./assets/haircuts/manifest.json'), json('./assets/editorial/manifest.json')]).then(async ([references, editorial]) => {
-    assets = new Map(references.assets.map(asset => [asset.id, asset]));
-    heroAssets = new Map(editorial.assets.map(asset => [asset.id, asset]));
-    await loadHero(cuts[0].id);
-    sceneReady = true; save.disabled = viewTrigger.disabled = false; schedule();
+  loadHero(cuts[0].id).then(() => {
+    startScene(); schedule();
     Promise.allSettled(cuts.slice(1).map(cut => loadHero(cut.id))).then(schedule);
+  }).catch(() => {
+    if (!sceneReady) message('Лукбук не загрузился. Обновите страницу.');
   });
-  ready.catch(() => message('Лукбук не загрузился. Обновите страницу.'));
 })();
