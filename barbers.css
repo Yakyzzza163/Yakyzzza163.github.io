@@ -1,5 +1,8 @@
 .barbers{background:#171b18;color:#f5f5ef;color-scheme:dark;padding:82px 5.5vw 92px;scroll-margin-top:0}
 .barbers .section-heading{margin-bottom:36px}
+.barber-nav {
+  display: none;
+}
 .barbers .section-heading h2{font-size:clamp(32px,3.5vw,48px);font-weight:700;letter-spacing:-.05em}
 .barber-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:52px 28px}
 .barber-grid:focus-visible{outline:1px solid #ffffff80;outline-offset:8px}
@@ -26,6 +29,40 @@
 @media(max-width:700px){
   .barbers{padding:52px 0 58px;overflow:hidden}
   .barbers .section-heading{margin-bottom:28px;padding:0 22px}
+  .barbers .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .barber-nav:not([hidden]) {
+    display: flex;
+    gap: 8px;
+  }
+
+  .barber-nav button {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #ffffff70;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .barber-nav button:hover:not(:disabled) {
+    background: #ffffff16;
+    border-color: #fff;
+  }
+
+  .barber-nav button:disabled {
+    opacity: .35;
+    cursor: default;
+  }
   .barbers .section-heading h2{font-size:32px}
   .barber-grid{display:flex;gap:16px;overflow-x:auto;padding:0 22px 20px;scroll-snap-type:x mandatory;scroll-padding-inline:22px;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#7b8478 #30382f}
   .barber-grid::-webkit-scrollbar{height:2px}
