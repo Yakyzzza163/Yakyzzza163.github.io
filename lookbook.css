@@ -33,3 +33,43 @@
   opacity: 1;
   text-decoration-color: #fff;
 }
+
+.location-hours {
+  margin: 0 0 4px;
+  color: #f5f5ef;
+  font-size: 16px;
+}
+
+.location-entrance {
+  width: 100%;
+  margin: 24px 0 0;
+}
+
+.location-entrance img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #ffffff26;
+}
+
+.location-entrance figcaption {
+  margin-top: 10px;
+  color: #f5f5ef;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.location-entrance figcaption p {
+  margin: 0 0 4px;
+}
+
+.location-entrance figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  gap: 5px;
+  color: #adb3ac;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
